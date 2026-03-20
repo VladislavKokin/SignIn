@@ -1,0 +1,133 @@
+*,
+:after,
+:before,
+::backdrop {
+    box-sizing: border-box;
+    border: 0 solid;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    min-height:100vh;
+    min-width: 1440px;
+    background-image: url(public/background.svg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blockSignIn {
+    width: 564px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 42px;
+}
+
+.header {
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.signIn {
+    font-family: "Great Vibes", cursive;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 60px;
+    color: #313039;
+}
+
+.logIn {
+    font-family: "Great Vibes", cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #9794AA;
+}
+
+.links {
+    font-weight: 600;
+    color: #1B6953;
+}
+
+.main {
+    width: 480px;
+    height: 374px;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.labels {
+    font-family: "Great Vibes", cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #49475A;
+}
+
+.inputs {
+    width: 480px;
+    height: 56px;
+    border: 1px solid #CBCAD7;
+    border-radius: 12px;
+    padding: 5px 10px 5px 10px;
+}
+
+.buttonSignIn {
+    width: 480px;
+    height: 56px;
+    background: #1B6953;
+    border-radius: 8px;
+    font-family: "Great Vibes", cursive;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #FFFFFF;
+    margin-top: 10px;
+    transition: transform 0.1s ease;
+}
+
+.buttonSignIn:disabled {
+    background: gray
+}
+
+.authorizationIcon {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+    margin-top: 24px;
+}
+
+.buttonIcon {
+    width: 110px;
+    height: 56px;
+    background: #FFFFFF;
+    border: 1px solid #CBCAD7;
+    border-radius: 40px;
+    transition: transform 0.1s ease;
+    
+}
+
+.buttonSignIn:active {
+    transform: scale(0.95);
+}
+
+.buttonIcon:active {
+    transform: scale(0.85);
+}

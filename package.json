@@ -10,18 +10,19 @@
     "preview": "vite preview"
   },
   "eslintConfig": {
-  "extends": [
-    "react-app",
-    "react-app/jest",
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
-  ]
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ]
   },
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -36,5 +37,17 @@
     "globals": "^16.5.0",
     "prettier": "^3.8.1",
     "vite": "^7.3.1"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladislavKokin/X0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladislavKokin/X0/issues"
+  },
+  "homepage": "https://github.com/VladislavKokin/X0#readme"
 }
