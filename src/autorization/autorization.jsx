@@ -1,41 +1,5 @@
-import * as yup from 'yup'
 import { useState } from 'react';
 import styles from '/src/autorization/aururization.module.css'
-
-// const emailChangeScheme = yup
-//   .string()
-//   .matches(
-//     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-//     "Пароль должен содержать от 8 до 20 символов,включая хотя бы одну заглавную букву, цифру и специальный символ.",
-//   );
-
-// const passwordChangeScheme = yup
-//   .string()
-//   .matches(
-//     /^(?=.*?[A-Z])(?=.*?\d)(?=.*?[-#$%!@&*?])[A-Za-z\d\-#$%!@&*?]{8,20}$/,
-//     "Некорректный E-mail",
-//   );
-
-// const repeatPasswordChangeScheme = yup
-//   .string()
-//   .matches(
-//     repeatPassword !== password, 
-//     'Пароли не совпадают.'
-//   );
-
-// const validateAndGetErrorMessage = (schema, value) => {
-//     let errorMessage = null;
-
-//     try {
-//         schema.validateSync(value);
-//     } catch ({ errors }) {
-//         errorMessage = errors
-//             .reduce((message, error) => message + error + 'n', '')
-//             .trim();
-//     }
-
-//     return errorMessage;
-// };
 
 const sendData = ({email, password}) => {
   console.log({email, password})
@@ -53,9 +17,6 @@ const Autorization = () => {
 
   const onEmailChange = ({ target }) => {
     setEmail(target.value);
-
-    // const error = validateAndGetErrorMessage(emailChangeScheme, target.value);
-    // setErrorEmail(error)
     
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(target.value)) {
       setErrorEmail('Некорректный E-mail')
@@ -67,9 +28,6 @@ const Autorization = () => {
   const onPasswordChange = ({ target }) => {
     setPassword(target.value);
 
-    // const error = validateAndGetErrorMessage(passwordChangeScheme, target.value);
-    // setErrorPassword(error)
-
     if (!/^(?=.*?[A-Z])(?=.*?\d)(?=.*?[-#$%!@&*?])[A-Za-z\d\-#$%!@&*?]{8,20}$/.test(target.value)) {
       setErrorPassword('Пароль должен содержать от 8 до 20 символов, включая хотя бы одну заглавную букву, цифру и специальный символ.')
     } else {
@@ -79,9 +37,6 @@ const Autorization = () => {
 
   const onRepeatPasswordChange = ({ target }) => {
     setRepeatPassword(target.value);
-
-    // const error = validateAndGetErrorMessage(repeatPasswordChangeScheme, target.value);
-    // errorRepeatPassword(error)
 
     if (repeatPassword !== password) {
       setErrorRepeatPassword('Пароли не совпадают.')
