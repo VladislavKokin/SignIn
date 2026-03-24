@@ -1,5 +1,42 @@
+import * as yup from 'yup'
 import { useState } from 'react';
 import styles from '/src/autorization/aururization.module.css'
+
+const emailChangeScheme = yup
+  .string()
+  .matches(
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Некорректный E-mail",
+  );
+
+const passwordChangeScheme = yup
+  .string()
+  .matches(
+    /^(?=.*?[A-Z])(?=.*?\d)(?=.*?[-#$%!@&*?])[A-Za-z\d\-#$%!@&*?]{8,20}$/,
+    "Пароль должен содержать от 8 до 20 символов,включая хотя бы одну заглавную букву, цифру и специальный символ."
+  );
+
+const repeatPasswordChangeScheme = (password) =>
+  yup
+    .string()
+    .test(
+      'password-match',
+      'Пароли не совпадают',
+      (value) => value === password
+    );
+
+const validateAndGetErrorMessage = (schema, value) => {
+    let errorMessage = null;
+
+    try {
+        schema.validateSync(value);
+    } catch ({ errors }) {
+        errorMessage = errors
+            .reduce((message, error) => message + error)
+            .trim();
+    }
+
+    return errorMessage;
+};
 
 const sendData = ({email, password}) => {
   console.log({email, password})
@@ -17,37 +54,28 @@ const Autorization = () => {
 
   const onEmailChange = ({ target }) => {
     setEmail(target.value);
-    
-    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(target.value)) {
-      setErrorEmail('Некорректный E-mail')
-    } else {
-      setErrorEmail(null)
-    }
+    const error = validateAndGetErrorMessage(emailChangeScheme, target.value);
+    setErrorEmail(error)
   }
 
   const onPasswordChange = ({ target }) => {
     setPassword(target.value);
-
-    if (!/^(?=.*?[A-Z])(?=.*?\d)(?=.*?[-#$%!@&*?])[A-Za-z\d\-#$%!@&*?]{8,20}$/.test(target.value)) {
-      setErrorPassword('Пароль должен содержать от 8 до 20 символов, включая хотя бы одну заглавную букву, цифру и специальный символ.')
-    } else {
-      setErrorPassword(null)
-    }
+    const error = validateAndGetErrorMessage(passwordChangeScheme, target.value);
+    setErrorPassword(error)
   }
 
   const onRepeatPasswordChange = ({ target }) => {
     setRepeatPassword(target.value);
-
-    if (repeatPassword !== password) {
-      setErrorRepeatPassword('Пароли не совпадают.')
-    } else {
-      setErrorRepeatPassword(null)
-    }
+    const error = validateAndGetErrorMessage(
+      repeatPasswordChangeScheme(password),
+      target.value
+    );
+    setErrorRepeatPassword(error)
   }
 
   const onSubmit = (event) => {
     event.preventDefault();
-    sendData({email, password});
+      sendData({email, password});
   }
 
   return (
@@ -73,6 +101,9 @@ const Autorization = () => {
                 value={email}
                 onChange={onEmailChange}
               />
+              {errorEmail && (
+                <div className={styles.error}>{errorEmail}</div>
+              )}
             </div>
             <div className={styles.inputContainer}>
               <label className={styles.labels}>Пароль</label>
@@ -83,6 +114,9 @@ const Autorization = () => {
                 value={password}
                 onChange={onPasswordChange}
               />
+              {errorPassword && (
+                <div className={styles.error}>{errorPassword}</div>
+              )}
             </div>
             <div className={styles.inputContainer}>
               <label className={styles.labels}>Подтверждение пароля</label>
@@ -91,25 +125,14 @@ const Autorization = () => {
                 name="repeatPassword"
                 value={repeatPassword} 
                 onChange={onRepeatPasswordChange}/>
+              {errorRepeatPassword && (
+                <div className={styles.error}>{errorRepeatPassword}</div>
+              )}
             </div>
-            <button className={styles.buttonSignIn} type="submit" disabled={errorEmail !== null || errorPassword !== null || errorRepeatPassword}>
+            <button className={styles.buttonSignIn} type="submit" disabled={errorEmail !== null || errorPassword !== null || !!errorRepeatPassword}>
               Создать аккаунт
             </button>
           </form>
-        </section>
-        <section className={styles.authorizationIcon}>
-          <button href="#" className={styles.buttonIcon}>
-            <img src="public/Social media signup/Google.svg" alt="Google" />
-          </button>
-          <button href="#" className={styles.buttonIcon}>
-            <img src="public/Social media signup/Appel.svg" alt="Appel" />
-          </button>
-          <button href="#" className={styles.buttonIcon}>
-            <img src="public/Social media signup/Facebook.svg" alt="Facebook" />
-          </button>
-          <button href="#" className={styles.buttonIcon}>
-            <img src="public/Social media signup/Twitter.svg" alt="Twitter" />
-          </button>
         </section>
       </div>
     </div>
